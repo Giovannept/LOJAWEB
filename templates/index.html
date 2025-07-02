@@ -2,9 +2,13 @@
 <html>
 <head>
     <title>Loja de Roupas</title>
-    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Bem-vindo à Loja de Roupas!</h1>
+    <h1>Bem-vindo à Loja D`Praianas</h1>
+    <ul>
+        {% for p in produtos %}
+            <li>{{ p.nome }} — R$ {{ "%.2f"|format(p.preco) }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
