@@ -24,8 +24,12 @@
             font-size: 1.2em;
         }
         nav {
-            <a href="{{ url_for('ver_carrinho') }}" style="background:#FFD700; color:black;">🛍 Ver Carrinho</a>
-
+            <a href="{{ url_for('ver_carrinho') }}" class="carrinho-icon" title="Ver carrinho">
+    🛒
+    {% if qtd_carrinho > 0 %}
+        <span class="badge">{{ qtd_carrinho }}</span>
+    {% endif %}
+</a>
             margin-bottom: 20px;
         }
         nav a {
