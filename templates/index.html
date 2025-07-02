@@ -2,12 +2,44 @@
 <html>
 <head>
     <title>Loja de Roupas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #ff6f3c; color: #222; text-align: center; margin-top: 40px;}
+        nav { margin-bottom: 20px; }
+        nav a {
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background: #222;
+            color: #ffb347;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        nav a.active {
+            background: #ffb347;
+            color: #222;
+        }
+        ul { list-style-type: none; padding: 0; max-width: 400px; margin: 0 auto; }
+        li {
+            background: rgba(255, 111, 60, 0.85);
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 10px;
+            color: black;
+            font-weight: 600;
+            box-shadow: 1px 1px 5px #000000aa;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo à Loja D`Praianas</h1>
+    <h1>Loja de Roupas - {{ categoria_atual }}</h1>
+    <nav>
+        {% for cat in categorias %}
+            <a href="/?categoria={{ cat }}" class="{{ 'active' if cat == categoria_atual else '' }}">{{ cat }}</a>
+        {% endfor %}
+    </nav>
     <ul>
-        {% for p in produtos %}
-            <li>{{ p.nome }} — R$ {{ "%.2f"|format(p.preco) }}</li>
+        {% for produto in produtos %}
+            <li>{{ produto.nome }} — R$ {{ "%.2f"|format(produto.preco) }}</li>
         {% endfor %}
     </ul>
 </body>
