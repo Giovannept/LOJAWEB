@@ -86,6 +86,7 @@ def home():
     categorias = list(produtos.keys())
     return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria)
 
+
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
 app.run(debug=True, host="0.0.0.0", port=port)
