@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrinho</title>
+</head>
+<body style="background:#f8f8f8; font-family:sans-serif; text-align:center;">
+    <h1>🛍 Seu Carrinho</h1>
+    <ul>
+        {% for item in carrinho %}
+            <li>{{ item.nome }} — R$ {{ "%.2f"|format(item.preco) }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total:</strong> R$ {{ "%.2f"|format(total) }}</p>
+    <a href="/">← Continuar comprando</a>
+</body>
+</html>
