@@ -94,13 +94,17 @@
         {% endfor %}
     </nav>
 
-    <ul>
-        {% for produto in produtos %}
-            <li>{{ produto.nome }} — R$ {{ "%.2f"|format(produto.preco) }}</li>
-        {% else %}
-            <li>Sem produtos nessa categoria.</li>
-        {% endfor %}
-    </ul>
+   <ul>
+    {% for produto in produtos %}
+        <li>
+            {{ produto.nome }} — R$ {{ "%.2f"|format(produto.preco) }}
+            <a href="{{ url_for('add_to_cart', categoria=categoria_atual, nome=produto.nome) }}" style="margin-left:10px; color: yellow; font-weight: bold;">
+                [+] Adicionar
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
 
     <script>
         const numMermaids = 15;
