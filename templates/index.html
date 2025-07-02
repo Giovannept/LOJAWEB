@@ -97,6 +97,8 @@
     <ul>
         {% for produto in produtos %}
             <li>{{ produto.nome }} — R$ {{ "%.2f"|format(produto.preco) }}</li>
+        {% else %}
+            <li>Sem produtos nessa categoria.</li>
         {% endfor %}
     </ul>
 
@@ -106,7 +108,127 @@
 
         for (let i = 0; i < numMermaids; i++) {
             let mermaid = document.createElement('img');
-            mermaid.src = '/static/mermaid.png';
+            mermaid.src = '/static/mermaid.png';  // coloque sua imagem nesse caminho
+            mermaid.classList.add('mermaid');
+            mermaid.style.left = Math.random() * 100 + 'vw';
+            mermaid.style.animationDuration = (5 + Math.random() * 5) + 's';
+            mermaid.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(mermaid);
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D`PRAIANAS</title>
+    <style>
+        body {
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #FF6F3C, #1A1A1A);
+            color: #FFB347;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+        }
+        h1 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px #00000088;
+        }
+        p.slogan {
+            font-style: italic;
+            color: #ffb347;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background: #222;
+            color: #ffb347;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+        nav a.active {
+            background: #ffb347;
+            color: #222;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        li {
+            background: rgba(255, 111, 60, 0.85);
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 10px;
+            color: black;
+            font-weight: 600;
+            box-shadow: 1px 1px 5px #000000aa;
+            transition: background 0.3s ease;
+        }
+        li:hover {
+            background: #ff8c4b;
+            cursor: pointer;
+        }
+        /* Animação sereias */
+        .mermaid {
+            position: fixed;
+            top: -50px;
+            width: 40px;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            user-select: none;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>D`PRAIANAS</h1>
+    <p class="slogan">Estilo que veste seu verão o ano inteiro.</p>
+
+    <nav>
+        {% for cat in categorias %}
+            <a href="/?categoria={{ cat }}" class="{{ 'active' if cat == categoria_atual else '' }}">{{ cat }}</a>
+        {% endfor %}
+    </nav>
+
+    <ul>
+        {% for produto in produtos %}
+            <li>{{ produto.nome }} — R$ {{ "%.2f"|format(produto.preco) }}</li>
+        {% else %}
+            <li>Sem produtos nessa categoria.</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        const numMermaids = 15;
+        const container = document.body;
+
+        for (let i = 0; i < numMermaids; i++) {
+            let mermaid = document.createElement('img');
+            mermaid.src = '/static/mermaid.png';  // coloque sua imagem nesse caminho
             mermaid.classList.add('mermaid');
             mermaid.style.left = Math.random() * 100 + 'vw';
             mermaid.style.animationDuration = (5 + Math.random() * 5) + 's';
