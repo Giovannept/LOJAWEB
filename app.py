@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 app = Flask(__name__)
+app.secret_key = "qualquer_coisa_secreta"
 
 produtos = {
     "Calça": [
@@ -86,7 +87,29 @@ def home():
     categorias = list(produtos.keys())
     return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria)
 
+@app.route("/add/<categoria>/<nome>")
+def add_to_cart(categoria, nome):
+    produto = next((p for p in produtos.get(categoria, []) if p["nome"] == nome), None)
+    if not produto:
+        flash("Produto não encontrado.")
+        return redirect(url_for("home"))
+
+    if "carrinho" not in session:
+        session["carrinho"] = []
+
+    session["carrinho"].append({"nome": produto["nome"], "preco": produto["preco"]})
+    session.modified = True
+
+    flash(f"{produto['nome']} adicionado ao carrinho!")
+    return redirect(url_for("home", categoria=categoria))
+
+@app.route("/carrinho")
+def ver_carrinho():
+    carrinho = session.get("carrinho", [])
+    total = sum(item["preco"] for item in carrinho)
+    return render_template("carrinho.html", carrinho=carrinho, total=total)
 
 if __name__ == "__main__":
-  port = int(os.environ.get("PORT", 5000))
-app.run(debug=True, host="0.0.0.0", port=port)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host="0.0.0.0", port=port)
