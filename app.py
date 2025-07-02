@@ -1,15 +1,16 @@
+import os
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 produtos = {
     "Calça": [
-        {"nome": "CALÇA BIA OFF", "preco": 0.00},
-        {"nome": "CALÇA BIA CARAMELO", "preco": 0.00},
-        {"nome": "CALÇA BIA VERSALE PRETO E BRANCO", "preco": 0.00},
+        {"nome": "CALÇA BIA OFF", "preco": 132.08},
+        {"nome": "CALÇA BIA CARAMELO", "preco": 132.08},
+        {"nome": "CALÇA BIA VERSALE PRETO E BRANCO", "preco": 97.82},
     ],
     "Saia": [
-        {"nome": "SAIA TRICO BRANCO", "preco": 0.00},
+        {"nome": "SAIA TRICO BRANCO", "preco": 92.18},
         {"nome": "SAIA TRICO NUDE", "preco": 0.00},
         {"nome": "SAIA GRINGA AZUL", "preco": 0.00},
         {"nome": "SAIA TULE AZUL BEBE", "preco": 0.00},
@@ -35,58 +36,25 @@ produtos = {
         {"nome": "CJ TALIA", "preco": 0.00},
     ],
     "Biquíni": [
-        {"nome": "BIQUINI GABI ONCINHA M", "preco": 0.00},
-        {"nome": "BIQUINI GABI ONCINHA G", "preco": 0.00},
-        {"nome": "BIQUINI GABI VERMELHO G", "preco": 0.00},
-        {"nome": "BIQUINI GABI ROXO M", "preco": 0.00},
-        {"nome": "BIQUINI GABI LARANJA G", "preco": 0.00},
-        {"nome": "BIQUINI GABI PRETO G", "preco": 0.00},
-        {"nome": "BIQUINI GABI MARROM M", "preco": 0.00},
-        {"nome": "BIQUINI GABI VERDE P", "preco": 0.00},
-        {"nome": "BIQUINI SOLAR AZUL BEBE G", "preco": 0.00},
-        {"nome": "BIQUINI DEBORA ROSA M", "preco": 0.00},
-        {"nome": "BIQUINI MELISSA MARROM M", "preco": 0.00},
-        {"nome": "BIQUINI TALIA VERDE G", "preco": 0.00},
-        {"nome": "BIQUINI TALIA VERMELHO G", "preco": 0.00},
-        {"nome": "BIQUINI MARINA SOL AZUL G", "preco": 0.00},
-        {"nome": "BIQUINI YOLANDA ROSE P", "preco": 0.00},
-        {"nome": "BIQUINI JULIA BRANCO G", "preco": 0.00},
-        {"nome": "BIQUINI ANTONELA VERDE LOURO M", "preco": 0.00},
-        {"nome": "BIQUINI ESTELA AZUL MOSCOW G", "preco": 0.00},
-        {"nome": "BIQUINI MARINA ROSA VERDE COLLOR M", "preco": 0.00},
-        {"nome": "BIQUINI MARINA LARANJA C AZUL M", "preco": 0.00},
-        {"nome": "MAIO BARRAMAS VERDE M", "preco": 0.00},
-        {"nome": "MAIO ANITTA AZUL P", "preco": 0.00},
-        {"nome": "MAIO ANITTA NUDE P", "preco": 0.00},
-        {"nome": "BIQUINI LUMA VERDE P", "preco": 0.00},
-        {"nome": "BIQUINI BELLE ROSA G", "preco": 0.00},
-        {"nome": "BIQUINI CORAÇAO ROSA G", "preco": 0.00},
-        {"nome": "BIQUINI NATALIA AZUL M", "preco": 0.00},
-        {"nome": "BIQUINI NATALIA NUDE M", "preco": 0.00},
-        {"nome": "BIQUINI SAMLA LARANJA P", "preco": 0.00},
-        {"nome": "BIQUINI SAMLA LARANJA G", "preco": 0.00},
-        {"nome": "BIQUINI SAMLA VERDE LOURO P", "preco": 0.00},
-        {"nome": "BIQUINI SAMLA VERDE LOURO M", "preco": 0.00},
-        {"nome": "BIQUINI SAMLA VERDE LOURO G", "preco": 0.00},
-        {"nome": "BIQUINI SOFIA VINHO P", "preco": 0.00},
-        {"nome": "BIQUINI SAMIA VINHO M", "preco": 0.00},
-        {"nome": "BIQUINI SAMIA VINHO P", "preco": 0.00},
-        {"nome": "BIQUINI SAMIA PRETO P", "preco": 0.00},
-        {"nome": "BIQUINI RAYLINE NUDE P", "preco": 0.00},
-        {"nome": "BIQUINI DAY NUDE M", "preco": 0.00},
-        {"nome": "BIQUINI DAY NUDE P", "preco": 0.00},
-        {"nome": "BIQUINI DAY VERDE MILITAR G", "preco": 0.00},
-        {"nome": "BIQUINI DAY ROSA G", "preco": 0.00},
-        {"nome": "BIQUINI DORY CINZA G", "preco": 0.00},
-        {"nome": "BIQUINI FITA SUPLEX LARANJA U", "preco": 0.00},
-        {"nome": "BIQUINI VERANO PRETO M", "preco": 0.00},
-        {"nome": "BIQUINI VERANO MARROM G", "preco": 0.00},
-        {"nome": "BIQUINI VERANO VINHO G", "preco": 0.00},
-        {"nome": "BIQUINI SANTORINI P/B P", "preco": 0.00},
-        {"nome": "BIQUINI SANTORINI P/B M", "preco": 0.00},
-        {"nome": "BIQUINI SANTORINI P/B G", "preco": 0.00},
-        {"nome": "BIQUINI LOUISIANA MARROM P", "preco": 0.00},
-        {"nome": "BIQUINI SIRIOS BRONZE G", "preco": 0.00},
+        {"nome": nome, "preco": 0.00} for nome in [
+            "BIQUINI GABI ONCINHA M", "BIQUINI GABI ONCINHA G", "BIQUINI GABI VERMELHO G",
+            "BIQUINI GABI ROXO M", "BIQUINI GABI LARANJA G", "BIQUINI GABI PRETO G",
+            "BIQUINI GABI MARROM M", "BIQUINI GABI VERDE P", "BIQUINI SOLAR AZUL BEBE G",
+            "BIQUINI DEBORA ROSA M", "BIQUINI MELISSA MARROM M", "BIQUINI TALIA VERDE G",
+            "BIQUINI TALIA VERMELHO G", "BIQUINI MARINA SOL AZUL G", "BIQUINI YOLANDA ROSE P",
+            "BIQUINI JULIA BRANCO G", "BIQUINI ANTONELA VERDE LOURO M", "BIQUINI ESTELA AZUL MOSCOW G",
+            "BIQUINI MARINA ROSA VERDE COLLOR M", "BIQUINI MARINA LARANJA C AZUL M", "MAIO BARRAMAS VERDE M",
+            "MAIO ANITTA AZUL P", "MAIO ANITTA NUDE P", "BIQUINI LUMA VERDE P", "BIQUINI BELLE ROSA G",
+            "BIQUINI CORAÇAO ROSA G", "BIQUINI NATALIA AZUL M", "BIQUINI NATALIA NUDE M",
+            "BIQUINI SAMLA LARANJA P", "BIQUINI SAMLA LARANJA G", "BIQUINI SAMLA VERDE LOURO P",
+            "BIQUINI SAMLA VERDE LOURO M", "BIQUINI SAMLA VERDE LOURO G", "BIQUINI SOFIA VINHO P",
+            "BIQUINI SAMIA VINHO M", "BIQUINI SAMIA VINHO P", "BIQUINI SAMIA PRETO P",
+            "BIQUINI RAYLINE NUDE P", "BIQUINI DAY NUDE M", "BIQUINI DAY NUDE P",
+            "BIQUINI DAY VERDE MILITAR G", "BIQUINI DAY ROSA G", "BIQUINI DORY CINZA G",
+            "BIQUINI FITA SUPLEX LARANJA U", "BIQUINI VERANO PRETO M", "BIQUINI VERANO MARROM G",
+            "BIQUINI VERANO VINHO G", "BIQUINI SANTORINI P/B P", "BIQUINI SANTORINI P/B M",
+            "BIQUINI SANTORINI P/B G", "BIQUINI LOUISIANA MARROM P", "BIQUINI SIRIOS BRONZE G"
+        ]
     ],
     "Body": [
         {"nome": "BODY SIRIOS BRONZE M", "preco": 0.00},
@@ -119,4 +87,5 @@ def home():
     return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
