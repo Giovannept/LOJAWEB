@@ -31,7 +31,9 @@
     </style>
 </head>
 <body>
-    <h1>Loja de Roupas - {{ categoria_atual }}</h1>
+    <h1>D`PRAIANAS</h1>
+<p style="font-style: italic; color: #ffb347; margin-top: -10px;">Estilo que veste seu verão o ano inteiro.</p>
+
     <nav>
         {% for cat in categorias %}
             <a href="/?categoria={{ cat }}" class="{{ 'active' if cat == categoria_atual else '' }}">{{ cat }}</a>
