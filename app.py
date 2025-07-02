@@ -85,7 +85,8 @@ def home():
     categoria = request.args.get("categoria", "Biquíni")
     produtos_cat = produtos.get(categoria, [])
     categorias = list(produtos.keys())
-    return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria)
+    qtd_carrinho = len(session.get("carrinho", []))
+    return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria, qtd_carrinho=qtd_carrinho)
 
 @app.route("/add/<categoria>/<nome>")
 def add_to_cart(categoria, nome):
