@@ -1,18 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-produtos = [
-    {"nome": "CALÇA BIA OFF", "preco": 132.08},
-    {"nome": "CALÇA BIA CARAMELO", "preco": 132.08},
-    {"nome": "CALÇA BIA VERSALE PRETO E BRANCO", "preco": 97.82},
-    {"nome": "SAIA TRICO BRANCO", "preco": 92.18},
-    # ... (só continuar com todos os seus produtos)
-]
+produtos = {
+    "Biquíni": [
+        {"nome": "Biquíni Estampado", "preco": 79.90},
+        {"nome": "Biquíni Preto", "preco": 89.90},
+    ],
+    "Saia": [
+        {"nome": "Saia Jeans", "preco": 120.00},
+        {"nome": "Saia Tricô", "preco": 92.18},
+    ],
+    "Calça": [
+        {"nome": "Calça Bia Off", "preco": 132.08},
+        {"nome": "Calça Bia Caramelo", "preco": 132.08},
+    ]
+}
 
 @app.route("/")
 def home():
-    return render_template("index.html", produtos=produtos)
+    categoria = request.args.get("categoria", "Biquíni")
+    produtos_cat = produtos.get(categoria, [])
+    categorias = list(produtos.keys())
+    return render_template("index.html", categorias=categorias, produtos=produtos_cat, categoria_atual=categoria)
 
 if __name__ == "__main__":
     import os
