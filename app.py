@@ -81,7 +81,7 @@ produtos = {
 }
 
 @app.route("/")
-def home():
+def index():
     categoria = request.args.get("categoria", "Biquíni")
     produtos_cat = produtos.get(categoria, [])
     categorias = list(produtos.keys())
