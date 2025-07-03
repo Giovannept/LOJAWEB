@@ -110,22 +110,6 @@
         </li>
     {% endfor %}
 </ul>
-
-
-    <script>
-        const numMermaids = 15;
-        const container = document.body;
-
-        for (let i = 0; i < numMermaids; i++) {
-            let mermaid = document.createElement('img');
-            mermaid.src = '/static/carrinho.png';  // coloque sua imagem nesse caminho
-            mermaid.classList.add('mermaid');
-            mermaid.style.left = Math.random() * 100 + 'vw';
-            mermaid.style.animationDuration = (5 + Math.random() * 5) + 's';
-            mermaid.style.animationDelay = (Math.random() * 10) + 's';
-            container.appendChild(mermaid);
-        }
-    </script>
 </body>
 </html>
 <!DOCTYPE html>
