@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Seu Carrinho</h1>
+{% if cart %}
+    <ul>
+        {% for item in cart %}
+        <li>{{ item.nome }} - R$ {{ item.preco }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total:</strong> R$ {{ total }}</p>
+{% else %}
+    <p>O carrinho está vazio.</p>
+{% endif %}
+<a href="{{ url_for('index') }}">Voltar</a>
+{% endblock %}
